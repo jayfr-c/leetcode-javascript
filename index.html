@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const apiUrl = "https://api.openai.com/v1/chat/completions"
+        const apiKey = ""
+        console.log("async function postData");
+
+        async function postData(url){
+            document.getElementById('message').value
+            console.log(message);
+            fetch(apiUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${apiKey}`
+
+                },
+                body: JSON.stringify(
+                    {
+                        "model": "gpt-3.5.turbo", 
+                        "messages": [
+                            {
+                                "role": "user",
+                                "content":`Write a javascript code for this question: ${message}`
+                            }
+                        ]
+                    }
+                )
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+        }
+    </script>
+    <style>
+        .background{
+            background-color: rgb(16, 15, 15);
+            color:#fff
+        }
+        .card{
+            background-color: black;
+            color:azure;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #fff;
+            border-radius: 4px; 
+        }
+        .input {
+            margin: 0 auto; 
+            margin-top: 30px; 
+            height: 200px; 
+            width: 80%;
+            display: block;
+        }
+    </style>
+</head>
+<body class="background">
+    <h1>LEETCode solution in javascript | OpenAI </h1>
+    <form>
+        <label for="message">Enter code statement: </label>
+        <textarea class="input" id="message" cols="30" rows="10"></textarea>
+        <button type="button" onclick="postData()">Send</button>
+        <div class="chat-area">test</div> 
+    </form>
+</body>
+</html>
